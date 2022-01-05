@@ -10,5 +10,5 @@ pluginManagement {
 
 rootProject.name = 'factions'
 
-include 'factions-common'
-include 'factions-fabric'
+include 'common'
+include 'fabric'
