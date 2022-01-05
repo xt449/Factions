@@ -34,7 +34,7 @@ public interface IFaction extends RelationContainer {
 	int getId();
 
 	/**
-	 * @return command friendly name
+	 * Use {@link String#toLowerCase()} for commands and {@link IRegistrar#getFaction(String)}
 	 */
 	@NotNull
 	String getName();
@@ -43,7 +43,7 @@ public interface IFaction extends RelationContainer {
 	 * @return null if Wilderness
 	 */
 	@Nullable
-	UUID getLeader();
+	IPlayerData getLeader();
 
 	/**
 	 * @return chunk positions of all current faction claims
@@ -55,14 +55,14 @@ public interface IFaction extends RelationContainer {
 	 * Includes ALL players, including: bans, kicks, invites, etc.
 	 */
 	@NotNull
-	Map<UUID, FactionRole> getAllPlayers();
+	Map<UUID, IPlayerData> getAllPlayers();
 
 	/**
 	 * Utility method for filtering {@link IFaction#getAllPlayers()}
 	 */
 	@NotNull
 	default Set<UUID> getPlayers(FactionRole role) {
-		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().equals(role)).map(Map.Entry::getKey).collect(Collectors.toSet());
+		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().getRole().equals(role)).map(Map.Entry::getKey).collect(Collectors.toSet());
 	}
 
 	/**
@@ -70,7 +70,7 @@ public interface IFaction extends RelationContainer {
 	 */
 	@NotNull
 	default Set<UUID> getPlayersGreaterThan(FactionRole role) {
-		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().compare(role) > 0).map(Map.Entry::getKey).collect(Collectors.toSet());
+		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().getRole().compare(role) > 0).map(Map.Entry::getKey).collect(Collectors.toSet());
 	}
 
 	/**
@@ -78,7 +78,7 @@ public interface IFaction extends RelationContainer {
 	 */
 	@NotNull
 	default Set<UUID> getPlayersGreaterThanOrEqualTo(FactionRole role) {
-		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().compare(role) >= 0).map(Map.Entry::getKey).collect(Collectors.toSet());
+		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().getRole().compare(role) >= 0).map(Map.Entry::getKey).collect(Collectors.toSet());
 	}
 
 	/**
@@ -86,7 +86,7 @@ public interface IFaction extends RelationContainer {
 	 */
 	@NotNull
 	default Set<UUID> getPlayersLessThan(FactionRole role) {
-		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().compare(role) < 0).map(Map.Entry::getKey).collect(Collectors.toSet());
+		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().getRole().compare(role) < 0).map(Map.Entry::getKey).collect(Collectors.toSet());
 	}
 
 	/**
@@ -94,7 +94,7 @@ public interface IFaction extends RelationContainer {
 	 */
 	@NotNull
 	default Set<UUID> getPlayersLessThanOrEqualTo(FactionRole role) {
-		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().compare(role) <= 0).map(Map.Entry::getKey).collect(Collectors.toSet());
+		return getAllPlayers().entrySet().stream().filter(kvp -> kvp.getValue().getRole().compare(role) <= 0).map(Map.Entry::getKey).collect(Collectors.toSet());
 	}
 
 	/**

@@ -34,7 +34,8 @@ public enum FactionRole {
 	MEMBER(5, "Member"),
 	TRUSTED(6, "Trusted"),
 	MODERATOR(7, "Moderator"),
-	COLEADER(8, "Coleader");
+	COLEADER(8, "Coleader"),
+	LEADER(9, "Leader");
 
 	private final int level;
 	public final String displayName;

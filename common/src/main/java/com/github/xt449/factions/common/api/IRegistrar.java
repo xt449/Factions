@@ -17,28 +17,9 @@
 
 package com.github.xt449.factions.common.api;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+/**
+ * Compound accessor interface for Factions
+ */
+public interface IRegistrar extends IClaimManager, IFactionManager, IPlayerManager {
 
-import java.util.UUID;
-
-public interface IRegistrar {
-
-	/**
-	 * @return the Wilderness Faction for unclaimed chunks
-	 */
-	@NotNull
-	IFaction getWildernessFaction();
-
-	/**
-	 * @return null if player is not part of a Faction
-	 */
-	@Nullable
-	IFaction getPlayerFaction(UUID playerId);
-
-	/**
-	 * @return null if id is invalid
-	 */
-	@Nullable
-	IFaction getFaction(int id);
 }

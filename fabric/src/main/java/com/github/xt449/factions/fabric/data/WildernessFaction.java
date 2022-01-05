@@ -27,49 +27,22 @@ import java.util.*;
 /**
  * @author Jonathan Talcott (xt449 / BinaryBanana)
  */
-public class Faction implements IFaction {
-
-	public final HashMap<UUID, PlayerData> player2Data = new HashMap<>();
-	public final HashMap<Faction, FactionRelation> faction2Relation = new HashMap<>();
-	public final HashSet<ChunkPosition> claims = new HashSet<>();
-
-	private int id;
-	private String name;
-	private PlayerData leaderPlayerData;
-
-	public Faction(int id, String name, PlayerData leaderPlayerData) {
-		this.id = id;
-		this.name = name;
-		this.leaderPlayerData = leaderPlayerData;
-
-		leaderPlayerData.faction = this;
-		leaderPlayerData.role = FactionRole.LEADER;
-		player2Data.put(leaderPlayerData.getId(), leaderPlayerData);
-	}
-
-	public Faction(String name, PlayerData leaderPlayerData) {
-		this.name = name;
-		this.leaderPlayerData = leaderPlayerData;
-
-		leaderPlayerData.faction = this;
-		leaderPlayerData.role = FactionRole.LEADER;
-		player2Data.put(leaderPlayerData.getId(), leaderPlayerData);
-	}
+public class WildernessFaction implements IFaction {
 
 	/**
 	 * Should be only used internally
 	 */
 	@Override
 	public int getId() {
-		return id;
+		return 0;
 	}
 
 	/**
-	 * Use {@link String#toLowerCase()} for commands and {@link IRegistrar#getFaction(String)}
+	 * @return command friendly name
 	 */
 	@Override
 	public @NotNull String getName() {
-		return name;
+		return "Wilderness";
 	}
 
 	/**
@@ -77,23 +50,23 @@ public class Faction implements IFaction {
 	 */
 	@Override
 	public @Nullable IPlayerData getLeader() {
-		return leaderPlayerData;
+		return null;
 	}
 
 	/**
-	 * @return chunk positions of all current faction claims (Immutable)
+	 * @return chunk positions of all current faction claims
 	 */
 	@Override
 	public @NotNull Set<ChunkPosition> getClaims() {
-		return Collections.unmodifiableSet(claims);
+		return Collections.emptySet();
 	}
 
 	/**
-	 * Includes ALL players, including: bans, kicks, invites, etc. (Immutable)
+	 * Includes ALL players, including: bans, kicks, invites, etc.
 	 */
 	@Override
 	public @NotNull Map<UUID, IPlayerData> getAllPlayers() {
-		return Collections.unmodifiableMap(player2Data);
+		return Collections.emptyMap();
 	}
 
 	/**
@@ -101,6 +74,6 @@ public class Faction implements IFaction {
 	 */
 	@Override
 	public @Nullable FactionRelation getRelationTo(RelationContainer other) {
-		return faction2Relation.get(other.getFaction());
+		return FactionRelation.NEUTRAL;
 	}
 }

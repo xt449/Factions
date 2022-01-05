@@ -17,22 +17,22 @@
 
 package com.github.xt449.factions.common.api;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 /**
- * Represents anything that has the capability of being (in) a faction
+ * Player accessor interface for Factions
  */
-public interface RelationContainer {
+public interface IPlayerManager {
+
+	@NotNull
+	IPlayerData initPlayerData(@NotNull UUID playerId);
 
 	/**
-	 * @return null if no relation set or relation not applicatable
+	 * @return null if player has not joined the server
 	 */
 	@Nullable
-	FactionRelation getRelationTo(RelationContainer other);
-
-	/**
-	 * @return null if not part of a Faction
-	 */
-	@Nullable
-	IFaction getFaction();
+	IPlayerData getPlayerData(@NotNull UUID playerId);
 }

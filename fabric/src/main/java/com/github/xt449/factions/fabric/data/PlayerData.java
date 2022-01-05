@@ -15,7 +15,7 @@
  *
  */
 
-package com.github.xt449.factions.common.data;
+package com.github.xt449.factions.fabric.data;
 
 import com.github.xt449.factions.common.api.*;
 import org.jetbrains.annotations.NotNull;
@@ -28,13 +28,27 @@ import java.util.UUID;
  */
 public class PlayerData implements IPlayerData {
 
+	private final UUID uuid;
+	public Faction faction;
+	public FactionRole role;
+
+	public PlayerData(UUID uuid, Faction faction, FactionRole role) {
+		this.uuid = uuid;
+		this.faction = faction;
+		this.role = role;
+	}
+
+	public PlayerData(UUID uuid) {
+		this.uuid = uuid;
+		this.faction = null;
+	}
+
 	/**
 	 * Should be only used internally
 	 */
 	@Override
 	public @NotNull UUID getId() {
-		// TODO
-		return null;
+		return uuid;
 	}
 
 	/**
@@ -42,8 +56,7 @@ public class PlayerData implements IPlayerData {
 	 */
 	@Override
 	public @Nullable IFaction getFaction() {
-		// TODO
-		return null;
+		return faction;
 	}
 
 	/**
@@ -51,8 +64,7 @@ public class PlayerData implements IPlayerData {
 	 */
 	@Override
 	public @Nullable FactionRole getRole() {
-		// TODO
-		return null;
+		return role;
 	}
 
 	/**
@@ -60,7 +72,19 @@ public class PlayerData implements IPlayerData {
 	 */
 	@Override
 	public @Nullable FactionRelation getRelationTo(RelationContainer other) {
-		// TODO
-		return null;
+		if(getFaction() == null) {
+			return null;
+		}
+		return getFaction().getRelationTo(other);
+	}
+
+	public void join(Faction faction, FactionRole role) {
+		this.faction = faction;
+		this.role = role;
+	}
+
+	public void leave() {
+		this.faction = null;
+		this.role = null;
 	}
 }
