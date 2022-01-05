@@ -1,10 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.github.xt449.factions.mixin",
+  "package": "com.github.xt449.factions.fabric.mixin",
   "compatibilityLevel": "JAVA_16",
   "server": [
-    "com.github.xt449.factions.fabric.mixin.ServerWorldMixin"
+    "ServerWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1
