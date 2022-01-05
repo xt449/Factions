@@ -2,15 +2,6 @@ plugins {
     id 'fabric-loom' version '0.10-SNAPSHOT'
 }
 
-repositories {
-    mavenCentral()
-    gradlePluginPortal()
-    maven {
-        name = 'Fabric'
-        url = 'https://maven.fabricmc.net/'
-    }
-}
-
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
