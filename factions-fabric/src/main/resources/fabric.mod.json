@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "fabric-factions",
+  "version": "${version}",
+  "name": "Factions",
+
+  "description": "Fabric mod loosely based on the FactionsUUID plugin for the Bukkit API",
+  "authors": [
+    "xt449",
+    "BinaryBanana"
+  ],
+  "contact": {},
+
+  "license": "Apache-2.0",
+
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "com.github.xt449.factions.fabric.FabricFactions"
+    ]
+  },
+
+  "mixins": [
+    "fabric-factions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "fabric": "*",
+    "minecraft": "1.17.x"
+  }
+}
